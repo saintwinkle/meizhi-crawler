@@ -1,0 +1,21 @@
+{
+  "name": "meizhi-crawler",
+  "version": "1.0.0",
+  "description": "A web crawler for http://meizhi.im",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saintwinkle/meizhi-crawler.git"
+  },
+  "author": "Twinkle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saintwinkle/meizhi-crawler/issues"
+  },
+  "homepage": "https://github.com/saintwinkle/meizhi-crawler",
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "eventproxy": "^0.3.1",
+    "superagent": "^0.21.0"
+  }
+}
