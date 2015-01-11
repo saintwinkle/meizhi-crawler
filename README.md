@@ -1,7 +1,7 @@
 Meizhi-Crawler
 ==============
 
-A web crawler for http://meizhi.im. Enjoy!!!
+A web crawler for http://meizhi.im.
 
 ## Install
 
@@ -14,12 +14,12 @@ cd meizhi-crawler
 ## Run
 
 ```
-node app.js
+node app.js (app_normal.js)
 ```
 
-Images will be downloaded in `meizhi-crawler` folder.
+Images will be saved in `images` folder. Enjoy!
 
 ## References
 
 1. https://github.com/alsotang/node-lessons/tree/master/lesson4
-2. https://nodejs.org/api
+2. https://nodejs.org/api/http.html#http_http_get_options_callback
