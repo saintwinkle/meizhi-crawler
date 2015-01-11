@@ -1,6 +1,5 @@
 var fs = require('fs');
 var http = require('http');
-var url = require('url');
 
 var cheerio = require('cheerio');
 var eventproxy = require('eventproxy');
@@ -9,13 +8,13 @@ var superagent = require('superagent');
 var meizhiUrl = 'http://meizhi.im';
 
 superagent.get(meizhiUrl)
+  .set('User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:34.0) Gecko/20100101 Firefox/34.0')
   .end(function (err, res) {
     if (err) throw err;
     var topicUrls = [];
     var $ = cheerio.load(res.text);
     $('.box > a').each(function (i, element) {
-      var $element = $(element);
-      var href = url.resolve(meizhiUrl, $element.attr('href'));
+      var href = meizhiUrl + $(this).attr('href');
       topicUrls.push(href);
     });
 
@@ -40,7 +39,7 @@ superagent.get(meizhiUrl)
             var imageName = res.headers['etag'];
             var imageType = res.headers['content-type'];
             var imageFullName = imageName.split('"')[1] + '.' + imageType.split('/')[1];
-            fs.writeFile(imageFullName, imageData, 'binary', function (err) {
+            fs.writeFile('images/' + imageFullName, imageData, 'binary', function (err) {
               if (err) throw err;
               console.log('Image ' + imageFullName +' saved!');
             });
@@ -51,10 +50,15 @@ superagent.get(meizhiUrl)
 
     topicUrls.forEach(function (topicUrl) {
       superagent.get(topicUrl)
+        .set('User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:34.0) Gecko/20100101 Firefox/34.0')
         .end(function (err, res) {
           if (err) throw err;
-          console.log('Fetch ' + topicUrl + ' successful!');
-          ep.emit('topic_html', res.text);
+          if (res.statusCode == 200) {
+            console.log('Fetch ' + topicUrl + ' successful!');
+            ep.emit('topic_html', res.text);
+          } else {
+            console.log('Fetch ' + topicUrl + ' failed!');
+          }
         });
     });
   });

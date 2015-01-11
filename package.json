@@ -1,6 +1,6 @@
 {
   "name": "meizhi-crawler",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "A web crawler for http://meizhi.im",
   "main": "app.js",
   "repository": {
